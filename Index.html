@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Joke App - Pre-register for the Waitlist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Universal Styles & Variables --- */
+        :root {
+            --primary-color: #4A47A3; /* A playful but solid purple */
+            --secondary-color: #AD62AA; /* A lighter, complementary purple */
+            --accent-color: #FFD166; /* A bright, energetic yellow for CTAs */
+            --dark-text: #272829;
+            --light-text: #FFFFFF;
+            --background-color: #F7F7FF;
+            --card-bg: #FFFFFF;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--dark-text);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--primary-color);
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.5rem; }
+
+        p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            border-radius: 50px;
+            background-color: var(--accent-color);
+            color: var(--dark-text);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(255, 209, 102, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 209, 102, 0.6);
+        }
+
+        /* --- Header & Navigation --- */
+        .main-header {
+            background: var(--background-color);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .logo span { color: var(--secondary-color); }
+
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .hero .subheadline {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 20px auto 40px;
+            color: #555;
+        }
+
+        .waitlist-form {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .waitlist-form input[type="email"] {
+            padding: 15px;
+            width: 300px;
+            border-radius: 50px;
+            border: 2px solid #ddd;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        .waitlist-form input[type="email"]:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+
+        .waitlist-info {
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        /* --- Value Props Section --- */
+        .value-props {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        .prop-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        .prop-card h3 {
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+        .prop-card .icon {
+            font-size: 3rem;
+        }
+
+        /* --- Problem/Solution Framework --- */
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .problem, .solution {
+            padding: 40px;
+            border-radius: var(--border-radius);
+        }
+        .problem {
+            background: #FFF0F0;
+            border: 2px solid #FFD1D1;
+        }
+        .solution {
+            background: #EBFFF0;
+            border: 2px solid #D1FFD6;
+        }
+        .problem h3, .solution h3 { color: var(--dark-text); margin-bottom: 15px; }
+        .problem ul, .solution ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .problem li, .solution li {
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .problem li::before {
+            content: '😫';
+            position: absolute;
+            left: 0;
+        }
+        .solution li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+        }
+
+        /* --- Feature Showcase Sections --- */
+        .feature {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        /* Alternate layout for even-numbered features */
+        .feature:nth-child(even) .feature-text {
+            order: 2;
+        }
+        .feature-mockup {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border: 1px solid #eee;
+        }
+        .feature-mockup-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .feature-mockup-header span {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+        }
+        .feature-mockup-header span:nth-child(1) { background: #ff5f56; }
+        .feature-mockup-header span:nth-child(2) { background: #ffbd2e; }
+        .feature-mockup-header span:nth-child(3) { background: #27c93f; }
+
+        /* Specific Mockups */
+        .generate-mockup .prompt-box {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            color: #888;
+        }
+        .generate-mockup .joke {
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .joke p { margin: 0; }
+        .joke .author { font-weight: 600; color: var(--primary-color); }
+        
+        .discover-mockup .joke-card {
+            border: 1px solid #eee; padding: 15px; border-radius: 8px; margin-bottom: 10px;
+        }
+        .joke-card .tags span {
+            background: var(--secondary-color); color: var(--light-text);
+            padding: 3px 8px; border-radius: 5px; font-size: 0.8rem; margin-right: 5px;
+        }
+        .joke-card .actions { margin-top: 10px; color: #aaa; }
+
+        .leaderboard-mockup li {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px; border-bottom: 1px solid #eee;
+        }
+        .leaderboard-mockup li:first-child { font-weight: 700; color: var(--primary-color); }
+        .leaderboard-mockup .score { font-weight: 600; background: var(--accent-color); padding: 3px 8px; border-radius: 5px; }
+
+        /* --- Social Proof Section --- */
+        .social-proof {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text);
+            text-align: center;
+            border-radius: var(--border-radius);
+            padding: 60px 40px;
+        }
+        .social-proof h2 { color: var(--light-text); }
+        
+        .user-types, .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .user-type-card, .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .user-type-card h3, .testimonial-card p {
+            color: var(--light-text);
+        }
+        .testimonial-card blockquote {
+            border: none;
+            padding: 0;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+        .testimonial-card cite {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--accent-color);
+            font-style: normal;
+        }
+
+        /* --- Final CTA Section --- */
+        .final-cta {
+            text-align: center;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 60px 40px;
+        }
+        .final-cta p {
+            max-width: 600px;
+            margin: 20px auto 40px;
+            font-size: 1.1rem;
+        }
+        .final-cta .bonus-points {
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid #eee;
+        }
+        footer .tagline {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        /* --- Responsive Styles --- */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2.2rem; }
+            .feature, .feature:nth-child(even) {
+                grid-template-columns: 1fr;
+            }
+            .feature:nth-child(even) .feature-text {
+                order: 0;
+            }
+            .feature-mockup {
+                margin-top: 30px;
+            }
+            .problem-solution {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            h1 { font-size: 2.5rem; }
+            section { padding: 60px 0; }
+            .waitlist-form { flex-direction: column; align-items: center; }
+            .waitlist-form input[type="email"] { width: 100%; max-width: 350px; }
+            .btn { width: 100%; max-width: 350px; text-align: center; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo">Joke<span>AI</span></a>
+            <nav class="main-nav">
+                <!-- Navigation links can be added here if needed -->
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- ======== HERO SECTION ======== -->
+        <section class="hero" id="home">
+            <div class="container">
+                <h1>Your Personal Comedy Writer, Powered by AI</h1>
+                <p class="subheadline">Generate hilarious jokes on any topic instantly. Share your best ones, discover comedy gold from others, and climb the leaderboard of laughs.</p>
+                <a href="#join-waitlist" class="btn">Be Among the First Comedy Legends</a>
+                <p class="waitlist-info">Join 5,000+ future comedians on the waitlist!</p>
+            </div>
+        </section>
+        
+        <!-- ======== CORE VALUE PROPS ======== -->
+        <section class="container">
+            <div class="value-props">
+                <div class="prop-card">
+                    <div class="icon">⚡️</div>
+                    <h3>Instant Comedy Creation</h3>
+                    <p>Type any prompt and get perfectly crafted jokes in seconds. Never run out of material.</p>
+                </div>
+                <div class="prop-card">
+                    <div class="icon">📂</div>
+                    <h3>Smart Organization</h3>
+                    <p>AI automatically tags your jokes. Browse by topic, mood, or trending tags to find humor you crave.</p>
+                </div>
+                <div class="prop-card">
+                    <div class="icon">👥</div>
+                    <h3>Comedy Community</h3>
+                    <p>Discover jokes from creators worldwide. Like, comment, and save favorites to your collection.</p>
+                </div>
+                <div class="prop-card">
+                    <div class="icon">🏆</div>
+                    <h3>Become a Comedy Legend</h3>
+                    <p>Earn points for every joke you create. Climb the leaderboard and enter the Hall of Fame.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== PROBLEM/SOLUTION FRAMEWORK ======== -->
+        <section class="container">
+            <div class="problem-solution">
+                <div class="problem">
+                    <h3>Struggling to be funny on demand?</h3>
+                    <ul>
+                        <li>You want to post something hilarious but your mind goes blank.</li>
+                        <li>Generic joke websites have stale, overused content.</li>
+                        <li>You have great ideas but can't craft them into perfect punchlines.</li>
+                    </ul>
+                </div>
+                <div class="solution">
+                    <h3>AI that gets your sense of humor.</h3>
+                    <ul>
+                        <li>Turn any idea into multiple joke variations instantly.</li>
+                        <li>Get fresh, original content tailored to current trends.</li>
+                        <li>Join a community that appreciates and builds on your creativity.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== FEATURE SHOWCASE ======== -->
+        <section class="container">
+            <!-- Feature 1: Generate -->
+            <div class="feature">
+                <div class="feature-text">
+                    <h2>From Idea to Instant Laughs</h2>
+                    <p>Simply type what you're thinking, and our AI does the heavy lifting. Watch as a simple idea transforms into a set of polished jokes, ready to share.</p>
+                    <p><strong>Try it: Generate your first joke in 10 seconds.</strong></p>
+                </div>
+                <div class="feature-mockup generate-mockup">
+                    <div class="feature-mockup-header"><span></span><span></span><span></span></div>
+                    <div class="prompt-box">jokes about working from home</div>
+                    <div class="joke">
+                        <p class="author">AI Generated Joke 1:</p>
+                        <p>"My WFH uniform is a constant battle between 'professional up top' and 'just woke up down below'. I call it the mullet of outfits."</p>
+                    </div>
+                    <div class="joke">
+                        <p class="author">AI Generated Joke 2:</p>
+                        <p>"Why did the programmer quit his WFH job? He couldn't get a remote connection."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 2: Discover -->
+            <div class="feature">
+                <div class="feature-text">
+                    <h2>Endless Comedy Feed</h2>
+                    <p>Dive into a stream of humor tailored to your tastes. Follow your favorite tags, discover what's making the community laugh, and find endless inspiration.</p>
+                    <p><strong>Browse #DadJokes, #GenZ, #WorkLife, or discover trending topics.</strong></p>
+                </div>
+                <div class="feature-mockup discover-mockup">
+                     <div class="feature-mockup-header"><span></span><span></span><span></span></div>
+                     <div class="joke-card">
+                         <p>"I told my suitcase we're not going on vacation. Now I'm dealing with emotional baggage."</p>
+                         <div class="tags"><span>#DadJokes</span><span>#Puns</span></div>
+                         <div class="actions">👍 1.2k | 💬 89 | 🔗 Share</div>
+                     </div>
+                     <div class="joke-card">
+                        <p>"My plants are dying. Guess I don't have a green thumb, more of a thumb of death."</p>
+                        <div class="tags"><span>#Relatable</span><span>#PlantParent</span></div>
+                        <div class="actions">👍 872 | 💬 45 | 🔗 Share</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3: Compete -->
+            <div class="feature">
+                <div class="feature-text">
+                    <h2>Rise Through the Ranks</h2>
+                    <p>Gamify your comedy! Earn points for creating jokes and get huge bonuses when others love them. See your name climb the weekly and all-time leaderboards.</p>
+                    <p><strong>Your Score: 347 points from 23 published jokes.</strong></p>
+                </div>
+                <div class="feature-mockup leaderboard-mockup">
+                    <div class="feature-mockup-header"><span></span><span></span><span></span></div>
+                    <h3>Top Comedians This Week</h3>
+                    <ul style="list-style-type: none;">
+                        <li><span>🥇 1. @ComedyQueen</span> <span class="score">12,450 pts</span></li>
+                        <li><span>🥈 2. @PunMasterFlex</span> <span class="score">11,980 pts</span></li>
+                        <li><span>🥉 3. @JokeMachine</span> <span class="score">10,500 pts</span></li>
+                        <li><span>4. You</span> <span class="score">347 pts</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ======== SOCIAL PROOF & COMMUNITY ======== -->
+        <section class="container">
+            <div class="social-proof">
+                <h2>Perfect For Every Kind of Comedian</h2>
+                <div class="user-types">
+                    <div class="user-type-card">
+                        <h3>Social Media Creators</h3>
+                        <p>Never run out of engaging content. Keep your followers laughing and your engagement high.</p>
+                    </div>
+                    <div class="user-type-card">
+                        <h3>Dad Joke Enthusiasts</h3>
+                        <p>Finally, a fresh supply of high-quality material for every family dinner and BBQ.</p>
+                    </div>
+                    <div class="user-type-card">
+                        <h3>Office Comedians</h3>
+                        <p>Be the funniest person in your group chat and the hero of the virtual water cooler.</p>
+                    </div>
+                </div>
+                <div class="testimonials">
+                    <div class="testimonial-card">
+                        <blockquote>"I went from zero likes to viral tweets! This app is my secret weapon."</blockquote>
+                        <cite>@FunnyCreator</cite>
+                    </div>
+                    <div class="testimonial-card">
+                        <blockquote>"My friends actually ask ME for jokes now. It's an incredible feeling."</blockquote>
+                        <cite>ComedyFan2024</cite>
+                    </div>
+                    <div class="testimonial-card">
+                        <blockquote>"The best app for breaking the ice at parties or in awkward Zoom meetings."</blockquote>
+                        <cite>SocialButterfly</cite>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== FINAL CTA SECTION ======== -->
+        <section class="container" id="join-waitlist">
+            <div class="final-cta">
+                <h2>Ready to Start Making People Laugh?</h2>
+                <p>Join the comedy revolution. Be the first to get access when we launch and get a head start on the competition. Your audience is waiting.</p>
+                <!-- This form is a placeholder. You'll need to connect it to an email service. -->
+                <form action="#" method="post" class="waitlist-form">
+                    <input type="email" name="email" placeholder="Enter your email address" required>
+                    <button type="submit" class="btn">Join the Waitlist Now</button>
+                </form>
+                <p class="bonus-points">Get early access + 100 bonus points to start!</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="tagline">Making the world laugh, one prompt at a time.</p>
+            <p>© 2024 JokeAI. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
