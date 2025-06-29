@@ -46,6 +46,11 @@
 
         section {
             padding: 80px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        section:last-child {
+            border-bottom: none;
         }
 
         h1, h2, h3 {
@@ -111,6 +116,7 @@
         .hero {
             text-align: center;
             padding: 100px 0;
+            border-bottom: none;
         }
 
         .hero .subheadline {
@@ -150,10 +156,17 @@
         /* --- Value Props Section --- */
         .value-props {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             text-align: center;
         }
+        
+        @media (max-width: 768px) {
+            .value-props {
+                grid-template-columns: 1fr;
+            }
+        }
+        
         .prop-card {
             background: var(--card-bg);
             padding: 30px;
@@ -173,11 +186,13 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 50px;
-            align-items: center;
+            align-items: stretch;
         }
         .problem, .solution {
             padding: 40px;
             border-radius: var(--border-radius);
+            display: flex;
+            flex-direction: column;
         }
         .problem {
             background: #FFF0F0;
@@ -191,6 +206,7 @@
         .problem ul, .solution ul {
             list-style-type: none;
             padding-left: 0;
+            flex-grow: 1;
         }
         .problem li, .solution li {
             padding-left: 25px;
@@ -206,6 +222,65 @@
             content: '✨';
             position: absolute;
             left: 0;
+        }
+
+        /* --- Interactive Demo Section --- */
+        .demo-section {
+            background: var(--card-bg);
+            padding: 60px 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .demo-form {
+            max-width: 600px;
+            margin: 30px auto;
+        }
+        
+        .demo-form textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid #ddd;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 80px;
+            margin-bottom: 15px;
+        }
+        
+        .demo-form textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+        
+        .generated-joke {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
+            text-align: left;
+            display: none;
+        }
+        
+        .generated-joke.show {
+            display: block;
+        }
+        
+        .joke-text {
+            font-size: 1.1rem;
+            color: var(--dark-text);
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .joke-credit {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            font-weight: 600;
         }
 
         /* --- Feature Showcase Sections --- */
@@ -227,27 +302,13 @@
             box-shadow: var(--box-shadow);
             border: 1px solid #eee;
         }
-        .feature-mockup-header {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-        .feature-mockup-header span {
-            width: 12px; height: 12px;
-            border-radius: 50%;
-            background: #ddd;
-        }
-        .feature-mockup-header span:nth-child(1) { background: #ff5f56; }
-        .feature-mockup-header span:nth-child(2) { background: #ffbd2e; }
-        .feature-mockup-header span:nth-child(3) { background: #27c93f; }
 
         /* Specific Mockups */
-        .generate-mockup .prompt-box {
-            background: #f0f0f0;
-            padding: 15px;
-            border-radius: 8px;
+        .generate-mockup .prompt-title {
+            font-weight: 600;
+            color: var(--primary-color);
             margin-bottom: 15px;
-            color: #888;
+            font-size: 1.1rem;
         }
         .generate-mockup .joke {
             border: 1px solid #eee;
@@ -295,15 +356,28 @@
             padding: 30px;
             border-radius: var(--border-radius);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
-        .user-type-card h3, .testimonial-card p {
+        .user-type-card h3 {
             color: var(--light-text);
+            margin-bottom: 15px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+        .user-type-card p, .testimonial-card p {
+            color: rgba(255, 255, 255, 0.9);
+            flex-grow: 1;
         }
         .testimonial-card blockquote {
             border: none;
             padding: 0;
             font-style: italic;
             font-size: 1.1rem;
+            flex-grow: 1;
         }
         .testimonial-card cite {
             display: block;
@@ -447,6 +521,22 @@
             </div>
         </section>
 
+        <!-- ======== INTERACTIVE DEMO SECTION ======== -->
+        <section class="container">
+            <div class="demo-section">
+                <h2>Try It Now - Generate Your First Joke!</h2>
+                <p>Type anything about 'boomers vs zoomers' or 'generations' below and watch AI create hilarious jokes instantly.</p>
+                <div class="demo-form">
+                    <textarea id="jokePrompt" placeholder="Type anything about 'boomers vs zoomers' or 'generations'..."></textarea>
+                    <button type="button" class="btn" onclick="generateJoke()">Generate Joke</button>
+                </div>
+                <div id="generatedJoke" class="generated-joke">
+                    <div class="joke-text" id="jokeText"></div>
+                    <div class="joke-credit">Generated by AI - Join the waitlist to create unlimited jokes!</div>
+                </div>
+            </div>
+        </section>
+
         <!-- ======== FEATURE SHOWCASE ======== -->
         <section class="container">
             <!-- Feature 1: Generate -->
@@ -454,11 +544,10 @@
                 <div class="feature-text">
                     <h2>From Idea to Instant Laughs</h2>
                     <p>Simply type what you're thinking, and our AI does the heavy lifting. Watch as a simple idea transforms into a set of polished jokes, ready to share.</p>
-                    <p><strong>Try it: Generate your first joke in 10 seconds.</strong></p>
+                    <p><strong>See how it works in the demo above!</strong></p>
                 </div>
                 <div class="feature-mockup generate-mockup">
-                    <div class="feature-mockup-header"><span></span><span></span><span></span></div>
-                    <div class="prompt-box">jokes about working from home</div>
+                    <div class="prompt-title">Jokes about working from home</div>
                     <div class="joke">
                         <p class="author">AI Generated Joke 1:</p>
                         <p>"My WFH uniform is a constant battle between 'professional up top' and 'just woke up down below'. I call it the mullet of outfits."</p>
@@ -478,7 +567,6 @@
                     <p><strong>Browse #DadJokes, #GenZ, #WorkLife, or discover trending topics.</strong></p>
                 </div>
                 <div class="feature-mockup discover-mockup">
-                     <div class="feature-mockup-header"><span></span><span></span><span></span></div>
                      <div class="joke-card">
                          <p>"I told my suitcase we're not going on vacation. Now I'm dealing with emotional baggage."</p>
                          <div class="tags"><span>#DadJokes</span><span>#Puns</span></div>
@@ -500,7 +588,6 @@
                     <p><strong>Your Score: 347 points from 23 published jokes.</strong></p>
                 </div>
                 <div class="feature-mockup leaderboard-mockup">
-                    <div class="feature-mockup-header"><span></span><span></span><span></span></div>
                     <h3>Top Comedians This Week</h3>
                     <ul style="list-style-type: none;">
                         <li><span>🥇 1. @ComedyQueen</span> <span class="score">12,450 pts</span></li>
@@ -565,9 +652,66 @@
     <footer>
         <div class="container">
             <p class="tagline">Making the world laugh, one prompt at a time.</p>
-            <p>© 2024 JokeAI. All Rights Reserved.</p>
+            <p>© 2025 JokeAI. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // Sample jokes for different topics
+        const jokeTemplates = {
+            'boomers v.s. zoomers': [
+                "Boomers be like: 'I worked three jobs to buy a house at 24.' Bro… houses cost $12 and a handshake back then. You could afford a house and a boat on a job called 'Record Store Vibes Manager.'",
+                "Boomers complain about participation trophies. Meanwhile, their high school superlatives were: 'Most Likely to Own a Factory' and 'Best Smoker's Cough.'",
+                "Boomers: 'You kids are addicted to your phones.' Also Boomers: 'If I forward you this email, Bill Gates will send you $5,000.'",
+                "Zoomers be like: 'I have anxiety.' Yes. You also have blue hair, 6 therapists, and an emotional support gecko named Waffles.",
+                "Zoomers invented e-boys and milk alternatives. Truly the most important contributions to society.",
+                "Boomers had anxiety too — they just called it 'Tuesday' and drank gin about it.",
+                "The war will never end. But if it did, it'd be because a Millennial finally stepped in and said: 'Can everyone please just go to therapy and hydrate?'",
+                "And Zoomers think Boomers are ancient. Meanwhile, Boomers invented sex, drugs, and Led Zeppelin. Zoomers invented e-boys and milk alternatives.",
+                "Boomers think 'ghosting' is when someone dies. Zoomers think answering a phone call without warning is a war crime."
+            ]
+        };
+
+        function generateJoke() {
+            const prompt = document.getElementById('jokePrompt').value.toLowerCase().trim();
+            if (prompt === '') {
+                alert('Please enter a topic to generate a joke!');
+                return;
+            }
+
+            // Show loading state
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = 'Generating...';
+            btn.disabled = true;
+
+            // Simulate AI processing time
+            setTimeout(() => {
+                let joke = '';
+                let found = false;
+
+                // Check if we have jokes for this topic
+                for (const [topic, jokes] of Object.entries(jokeTemplates)) {
+                    if (prompt.includes('boomer') || prompt.includes('zoomer') || prompt.includes('gen') || prompt.includes('generation')) {
+                        joke = jokes[Math.floor(Math.random() * jokes.length)];
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    joke = "Try typing something about 'boomers vs zoomers' or 'generations' to get our best jokes!";
+                }
+
+                document.getElementById('jokeText').textContent = joke;
+                document.getElementById('generatedJoke').classList.add('show');
+
+                // Reset button
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }, 1500); // 1.5 second delay to simulate AI processing
+        }
+    </script>
 
 </body>
 </html>
