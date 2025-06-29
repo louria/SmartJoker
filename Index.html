@@ -669,7 +669,7 @@
                     <h2>Ready to Start Making People Laugh?</h2>
                     <p>Join the comedy revolution. Be the first to get access when we launch and get a head start on the competition. Your audience is waiting.</p>
                     <!-- This form is a placeholder. You'll need to connect it to an email service. -->
-                    <form action="#" method="post" class="waitlist-form" netlify>
+                    <form action="#" method="post" class="waitlist-form" netlify onsubmit="gtag_report_conversion(); return true;">
                         <input type="email" name="email" placeholder="Enter your email address" required>
                         <button type="submit" class="btn">Join the Waitlist Now</button>
                     </form>
@@ -740,6 +740,20 @@
                 btn.textContent = originalText;
                 btn.disabled = false;
             }, 1500); // 1.5 second delay to simulate AI processing
+        }
+
+        function gtag_report_conversion(url) {
+          var callback = function () {
+            if (typeof(url) != 'undefined') {
+              window.location = url;
+            }
+          };
+          gtag('event', 'conversion', {
+              'send_to': 'AW-572710681/JZB9CI3Ym8cDEJm-i5EC',
+              'transaction_id': '',
+              'event_callback': callback
+          });
+          return false;
         }
     </script>
 
